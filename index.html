@@ -359,12 +359,39 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#" aria-label="GeoCircular Home">
         <i class="fas fa-leaf me-2"></i>GeoCircular
       </a>
-      <button id="menu-toggle" class="navbar-toggler" aria-label="Toggle navigation">☰</button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#research">Research</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#opportunities">Opportunities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#teamModal">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#publications">Publications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
@@ -573,7 +600,7 @@
               <li>Transcripts and diplomas from previous degrees</li>
               <li>References (2-3)</li>
             </ul>
-            <p>Interested applicants may send their CV and other necessary documents to <a href="mailto:saeid.nikkhah-nasab@geocircular.com">contact@geocircular.edu</a>.</p>
+            <p>Interested applicants may send their CV and other necessary documents to <br> <a href="mailto:saeid.nikkhah-nasab@geocircular.com">saeid.nikkhah-nasab@geocircular.com</a>.</p>
           </div>
         </div>
       </div>
@@ -741,6 +768,17 @@
       mirror: true // Elements animate out while scrolling past them
     });
 
+        // JavaScript for closing the navbar on link clicks
+    document.querySelectorAll('#navbarNav a').forEach(item => {
+      item.addEventListener('click', () => {
+        const collapseElement = document.querySelector('#navbarNav');
+        if (collapseElement.classList.contains('show')) {
+          const bsCollapse = new bootstrap.Collapse(collapseElement);
+          bsCollapse.hide();
+        }
+      });
+    });
+    
     // Full-screen menu toggle
     document.getElementById("menu-toggle").addEventListener("click", function () {
       document.getElementById("fullscreen-menu").style.display = "flex";
@@ -780,7 +818,7 @@
       document.getElementById("more-news-popup").style.display = "none";
     });
 
-        // Scroll to top functionality
+    // Scroll to top functionality
     window.onscroll = function () {
       const mybutton = document.getElementById("goToTop");
       if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -794,7 +832,7 @@
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     };
-
+    
   </script>
 </body>
 
