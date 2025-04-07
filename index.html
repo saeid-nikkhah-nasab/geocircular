@@ -243,6 +243,34 @@
         font-size: 2.5rem;
       }
     }
+    /* Publications Modal Styles */
+#allPublicationsModal .modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+#allPublicationsModal li {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  transition: all 0.3s ease;
+}
+
+#allPublicationsModal li:hover {
+  background-color: rgba(46, 139, 87, 0.05);
+  transform: translateX(5px);
+}
+
+#allPublicationsModal h5 {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+#allPublicationsModal h6 {
+  color: var(--text);
+  font-weight: 600;
+}
   </style>
 </head>
 <body>
@@ -474,7 +502,63 @@
       </div>
     </div>
   </div>
-
+<!-- All Publications Modal -->
+<div class="modal fade" id="allPublicationsModal" tabindex="-1" aria-labelledby="allPublicationsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="allPublicationsModalLabel">Complete Publications List</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="text-success mb-4">2023</h5>
+            <ul class="list-unstyled">
+              <li class="mb-4">
+                <h6>Sustainable soil stabilization using recycled construction aggregates</h6>
+                <p class="mb-1 text-muted">Journal of Geotechnical and Geoenvironmental Engineering</p>
+                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.geotexmem.2023.05.003</small>
+              </li>
+              <li class="mb-4">
+                <h6>Performance evaluation of recycled concrete in slope stabilization</h6>
+                <p class="mb-1 text-muted">Geotechnical Engineering Journal</p>
+                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.geoen.2023.08.012</small>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="col-md-6">
+            <h5 class="text-success mb-4">2022</h5>
+            <ul class="list-unstyled">
+              <li class="mb-4">
+                <h6>Life cycle assessment of geopolymer-stabilized soils</h6>
+                <p class="mb-1 text-muted">Environmental Science & Technology</p>
+                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1021/acs.est.2c01234</small>
+              </li>
+              <li class="mb-4">
+                <h6>Circular economy in geotechnical engineering: A comprehensive review</h6>
+                <p class="mb-1 text-muted">Geotechnical Frontiers</p>
+                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.geofront.2022.08.015</small>
+              </li>
+              <li class="mb-4">
+                <h6>Innovative reuse of plastic waste in soil reinforcement</h6>
+                <p class="mb-1 text-muted">Waste Management Journal</p>
+                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.wasman.2021.07.022</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">
+          <i class="fas fa-download me-1"></i>Download Full List (PDF)
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Contact Section -->
   <section id="contact" class="py-5">
     <div class="container">
