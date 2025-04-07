@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,9 @@
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/2E8B57/leaf.png">
   <!-- Custom CSS -->
@@ -27,11 +30,17 @@
       --bg-light: #f8f9fa;
       --text-light: #212529;
       --card-bg-light: #ffffff;
-      --pub-bg-light: #ffffff;       /* Background for publication items */
-      --pub-text-light: #212529;     /* Text color for publications */
-      --pub-hover-light: rgba(46, 139, 87, 0.1); /* Hover effect */
       --nav-bg-light: rgba(248, 249, 250, 0.95);
-            
+
+      /* Dark Theme Colors */
+      --primary-dark: #3CB371;
+      --secondary-dark: #4CAF50;
+      --accent-dark: #6B8E23;
+      --bg-dark: #121212;
+      --text-dark: #e0e0e0;
+      --card-bg-dark: #1e1e1e;
+      --nav-bg-dark: rgba(30, 30, 30, 0.95);
+
       /* Current Theme */
       --primary: var(--primary-light);
       --secondary: var(--secondary-light);
@@ -49,8 +58,24 @@
       transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Dark Mode Classes */
+    body.dark-mode {
+      --primary: var(--primary-dark);
+      --secondary: var(--secondary-dark);
+      --accent: var(--accent-dark);
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --card-bg: var(--card-bg-dark);
+      --nav-bg: var(--nav-bg-dark);
     }
 
     /* Navbar */
@@ -66,6 +91,29 @@
       color: var(--primary) !important;
     }
 
+    /* Go To Top Button */
+    #goToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: none;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-size: 24px;
+      transition: background-color 0.3s;
+      z-index: 1500;
+    }
+
+    #goToTop:hover {
+      background-color: var(--secondary);
+    }
+    
     /* Full-screen Menu */
     #fullscreen-menu {
       display: none;
@@ -95,8 +143,8 @@
 
     /* Hero Section with New Background Image */
     .hero {
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                  url('https://blog.agribazaar.com/wp-content/uploads/2023/07/Reduction-of-carbon-emissions-carbon-neutral-concept.-Net-zero-greenhouse-gas-emissions-target.-r-nReducing-carbon-footprint-concep-1.jpg');
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('https://newscenter.lbl.gov/wp-content/uploads/2022/11/Resized_3rdtimeluckystudio-shutterstock_2194510413.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -129,7 +177,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+      background:
+        url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')
+        center/cover no-repeat;
       z-index: -2;
     }
 
@@ -176,33 +226,104 @@
     }
 
     /* Publications */
-.publication-item {
-  background-color: var(--pub-bg);
-  color: var(--pub-text);
-  transition: all 0.3s ease;
-  border-left: 3px solid var(--primary);
-  margin-bottom: 10px;
-  padding: 15px;
-  border-radius: 5px;
-}
+    .publication-item {
+      background-color: var(--card-bg);
+      transition: all 0.3s ease;
+    }
 
-.publication-item:hover {
-  background-color: var(--pub-hover);
-  transform: translateX(5px);
-}
+    .publication-item:hover {
+      background-color: rgba(46, 139, 87, 0.1);
+      transform: translateX(5px);
+    }
 
-/* Ensure dark mode applies correctly */
-body.dark-mode {
-  --pub-bg: var(--pub-bg-dark);
-  --pub-text: var(--pub-text-dark);
-  --pub-hover: var(--pub-hover-dark);
-}
+    /* Popup Modal for Publications */
+    .publication-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-body:not(.dark-mode) {
-  --pub-bg: var(--pub-bg-light);
-  --pub-text: var(--pub-text-light);
-  --pub-hover: var(--pub-hover-light);
-}
+    .publication-popup-content {
+      background-color: white;
+      color: black;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;  /* Set maximum height for scrolling */
+      overflow-y: auto;   /* Enable scrolling */
+    }
+
+    .close-popup {
+      cursor: pointer;
+      color: red;
+      font-weight: bold;
+      text-align: right;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    /* More News Popup Modal */
+    .more-news-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .more-news-popup-content {
+      background-color: white;
+      color: black;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;  /* Set maximum height for scrolling */
+      overflow-y: auto;   /* Enable scrolling */
+    }
+
+    /* Opportunities Section */
+    #opportunities {
+      padding: 80px 0;
+    }
+
+    .opportunity-item {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .opportunity-item:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Required Documents Box */
+    .required-documents {
+      background-color: var(--bg-light);
+      border: 1px solid var(--secondary-light);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
     /* Contact Section */
     .social-icon {
       color: var(--primary);
@@ -220,47 +341,22 @@ body:not(.dark-mode) {
       #fullscreen-menu a {
         font-size: 1.5rem;
       }
-      
+
       .about-content {
         padding: 20px;
       }
-      
+
       #about {
         padding: 60px 0;
       }
-      
+
       .hero h1 {
         font-size: 2.5rem;
       }
     }
-    /* Publications Modal Styles */
-#allPublicationsModal .modal-body {
-  max-height: 70vh;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-#allPublicationsModal li {
-  background-color: var(--pub-bg);
-  color: var(--pub-text);
-}
-
-#allPublicationsModal li:hover {
-  background-color: var(--pub-hover);
-}
-    
-#allPublicationsModal h5 {
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 8px;
-  display: inline-block;
-}
-
-#allPublicationsModal h6 {
-  color: var(--text);
-  font-weight: 600;
-}
   </style>
 </head>
+
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
@@ -276,6 +372,8 @@ body:not(.dark-mode) {
   <div id="fullscreen-menu">
     <a href="#about">About</a>
     <a href="#research">Research</a>
+    <a href="#news">News</a>
+    <a href="#opportunities">Opportunities</a>
     <a href="#" data-bs-toggle="modal" data-bs-target="#teamModal">Team</a>
     <a href="#publications">Publications</a>
     <a href="#contact">Contact</a>
@@ -300,11 +398,13 @@ body:not(.dark-mode) {
           <div class="row">
             <div class="col-md-6" data-aos="fade-right" data-aos-once="false">
               <h3 class="text-success">Mission</h3>
-              <p>We pioneer sustainable geotechnical solutions by integrating circular economy principles to reduce waste and carbon footprint in construction and infrastructure development.</p>
+              <p>We pioneer sustainable geotechnical solutions by integrating circular economy principles to reduce waste
+                and carbon footprint in construction and infrastructure development.</p>
             </div>
             <div class="col-md-6" data-aos="fade-left" data-aos-once="false">
               <h3 class="text-success">Vision</h3>
-              <p>A world where geotechnical engineering operates in complete harmony with Earth's ecosystems, promoting sustainability through innovative material reuse and low-impact techniques.</p>
+              <p>A world where geotechnical engineering operates in complete harmony with Earth's ecosystems, promoting
+                sustainability through innovative material reuse and low-impact techniques.</p>
             </div>
           </div>
         </div>
@@ -324,14 +424,15 @@ body:not(.dark-mode) {
               <i class="fas fa-layer-group fa-3x" style="color: var(--primary);"></i>
             </div>
             <h4 class="text-center">Sustainable Geotechnics</h4>
-            <p class="text-center">Developing eco-friendly soil stabilization methods using industrial byproducts and recycled materials.</p>
+            <p class="text-center">Developing eco-friendly soil stabilization methods using industrial byproducts and
+              recycled materials.</p>
             <div class="text-center mt-3">
               <span class="badge bg-success me-1">Soil Mechanics</span>
               <span class="badge bg-success">Foundation Design</span>
             </div>
           </div>
         </div>
-        
+
         <!-- Theme 2 -->
         <div class="col-md-4" data-aos="fade-up" data-aos-delay="200" data-aos-once="false">
           <div class="research-card p-4">
@@ -339,14 +440,15 @@ body:not(.dark-mode) {
               <i class="fas fa-recycle fa-3x" style="color: var(--primary);"></i>
             </div>
             <h4 class="text-center">Circular Solutions</h4>
-            <p class="text-center">Transforming construction waste into valuable geotechnical materials through innovative processing techniques.</p>
+            <p class="text-center">Transforming construction waste into valuable geotechnical materials through
+              innovative processing techniques.</p>
             <div class="text-center mt-3">
               <span class="badge bg-success me-1">Material Science</span>
               <span class="badge bg-success">Waste Valorization</span>
             </div>
           </div>
         </div>
-        
+
         <!-- Theme 3 -->
         <div class="col-md-4" data-aos="fade-up" data-aos-delay="300" data-aos-once="false">
           <div class="research-card p-4">
@@ -354,98 +456,195 @@ body:not(.dark-mode) {
               <i class="fas fa-leaf fa-3x" style="color: var(--primary);"></i>
             </div>
             <h4 class="text-center">Green Infrastructure</h4>
-            <p class="text-center">Designing low-carbon geotechnical systems with minimized environmental impact throughout their lifecycle.</p>
+            <p class="text-center">Designing low-carbon geotechnical systems with minimized environmental impact
+              throughout their lifecycle.</p>
             <div class="text-center mt-3">
               <span class="badge bg-success me-1">LCA</span>
               <span class="badge bg-success">Eco-Design</span>
             </div>
           </div>
         </div>
+
+        <!-- Theme 4: Soil Contamination and Remediation -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="400" data-aos-once="false">
+          <div class="research-card p-4">
+            <div class="text-center mb-4">
+              <i class="fas fa-water fa-3x" style="color: var(--primary);"></i>
+            </div>
+            <h4 class="text-center">Soil Contamination and Remediation</h4>
+            <p class="text-center">Exploring sustainable approaches to remediate contaminated soil, utilizing advanced bioremediation techniques and eco-friendly materials.</p>
+            <div class="text-center mt-3">
+              <span class="badge bg-success me-1">Soil Remediation</span>
+              <span class="badge bg-success">Sustainable Practices</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-<!-- Publications Section -->
-<section id="publications" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-5" data-aos="fade-up" data-aos-once="false">Recent Publications</h2>
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <div class="list-group">
+  <!-- News Section -->
+  <section id="news" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up" data-aos-once="false">Group News</h2>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <!-- News Item 1 -->
+          <div class="news-item" data-aos="fade-right" data-aos-once="false">
+            <h4>New Research Grant Awarded</h4>
+            <p class="text-muted">April 6, 2025</p>
+            <p>The GeoCircular Research Group has been awarded a significant research grant to study the application of
+              recycled polymers in soil stabilization. This project aims to reduce plastic waste and improve soil
+              quality for construction purposes.</p>
+          </div>
+          <!-- News Item 2 -->
+          <div class="news-item" data-aos="fade-left" data-aos-once="false">
+            <h4>Dr. Nikkhah Nasab Presents at International Conference</h4>
+            <p class="text-muted">April 7, 2025</p>
+            <p>Dr. Saeid Nikkhah Nasab presented his latest findings on sustainable foundation design at the International
+              Geotechnical Engineering Conference in Rome. His presentation highlighted innovative methods for reducing
+              carbon emissions in urban infrastructure projects.</p>
+          </div>
+        </div>
+      </div>
+      
+  <!-- More News Button -->
+  <div class="text-center mt-4">
+    <button class="btn btn-success" id="load-more-news">More...</button>
+  </div>
+
+  <!-- More News Popup Modal -->
+  <div class="more-news-popup" id="more-news-popup">
+    <div class="more-news-popup-content">
+      <span class="close-popup" id="close-more-news-popup">× Close</span>
+      <h3>Previous News</h3>
+      <ul>
+        <li>
+          <h5>Advancements in Soil Remediation Techniques</h5>
+          <p class="text-muted">August 15, 2023</p>
+          <p>Researchers at GeoCircular have developed new bioremediation techniques that show promising results in the treatment of contaminated soils.</p>
+        </li>
+        <li>
+          <h5>Impact of Climate Change on Geotechnical Engineering</h5>
+          <p class="text-muted">July 1, 2023</p>
+          <p>A recent study highlights the effects of climate change on soil properties and the challenges it presents for environmental sustainability.</p>
+        </li>
+        <li>
+          <h5>Collaboration with Industry for Sustainable Practices</h5>
+          <p class="text-muted">June 20, 2023</p>
+          <p>GeoCircular has partnered with local industries to implement sustainable solutions for waste management in construction projects.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+ 
+  <!-- Go To Top Button -->
+  <button id="goToTop"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- Opportunities Section -->
+  <section id="opportunities" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up" data-aos-once="false">Opportunities</h2>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <!-- Opportunity Item 1 -->
+          <div class="opportunity-item" data-aos="fade-right" data-aos-once="false">
+            <h4>PhD Position: Sustainable Geotechnical Materials</h4>
+            <p class="text-muted">We are looking for a highly motivated PhD student to conduct research on the
+              development of sustainable geotechnical materials using industrial byproducts.</p>
+            <p class="text-muted">Application Deadline: November 30, 2025</p>
+          </div>
+
+          <!-- Opportunity Item 2 -->
+          <div class="opportunity-item" data-aos="fade-left" data-aos-once="false">
+            <h4>Postdoc Fellowship: Circular Construction Methods</h4>
+            <p class="text-muted">We invite applications for a postdoctoral fellowship focused on circular construction
+              methods in geotechnical engineering.</p>
+            <p class="text-muted">Application Deadline: December 15, 2025</p>
+          </div>
+
+          <!-- Required Documents Box -->
+          <div class="required-documents">
+            <h5>Required Documents:</h5>
+            <ul>
+              <li>Updated CV/Resume</li>
+              <li>Cover Letter</li>
+              <li>Transcripts and diplomas from previous degrees</li>
+              <li>References (2-3)</li>
+            </ul>
+            <p>Interested applicants may send their CV and other necessary documents to <a href="mailto:saeid.nikkhah-nasab@geocircular.com">contact@geocircular.edu</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  <section id="publications" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up" data-aos-once="false">Recent Publications</h2>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="list-group">
             <!-- Publication 1 -->
-            <a href="https://doi.org/example" class="list-group-item list-group-item-action publication-item mb-3" 
-               data-aos="fade-right" data-aos-once="false">
+            <a href="https://doi.org/10.1061/IJGNAI.GMENG-8197" class="list-group-item list-group-item-action publication-item mb-3"
+              data-aos="fade-right" data-aos-once="false">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Sustainable soil stabilization using recycled construction aggregates</h5>
-                <small class="text-success">2023</small>
+                <h5 class="mb-1">An Investigation on the Triaxial Changes of Zinc-Contaminated Clayey Sand</h5>
+                <small class="text-success">2024</small>
               </div>
-              <p class="mb-1">Journal of Geotechnical and Geoenvironmental Engineering</p>
-              <small><i class="fas fa-link me-1"></i>DOI: 10.1016/j.geotexmem.2023.05.003</small>
+              <p class="mb-1">International Journal of Geomechanics</p>
+              <small><i class="fas fa-link me-1"></i>DOI: 10.1061/IJGNAI.GMENG-8197</small>
             </a>
-            
+
             <!-- Publication 2 -->
-            <a href="https://doi.org/example" class="list-group-item list-group-item-action publication-item mb-3" 
-               data-aos="fade-left" data-aos-once="false">
+            <a href="https://doi.org/10.1061/(ASCE)HZ.2153-5515.0000631" class="list-group-item list-group-item-action publication-item mb-3"
+              data-aos="fade-left" data-aos-once="false">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Life cycle assessment of geopolymer-stabilized soils</h5>
-                <small class="text-success">2022</small>
+                <h5 class="mb-1">An experimental study of sand–clay mixtures contaminated with lead and zinc heavy metals</h5>
+                <small class="text-success">2021</small>
               </div>
-              <p class="mb-1">Environmental Science & Technology</p>
-              <small><i class="fas fa-link me-1"></i>DOI: 10.1021/acs.est.2c01234</small>
-            </a
-                      <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
-          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#allPublicationsModal">
-            <i class="fas fa-book-open me-2"></i>View Complete Publications List
-          </button>
+              <p class="mb-1">Journal of Hazardous, Toxic, and Radioactive Waste</p>
+              <small><i class="fas fa-link me-1"></i>DOI: 10.1061/(ASCE)HZ.2153-5515.0000631</small>
+            </a>
+          </div>
+          <button class="btn btn-success mt-4" id="show-all-publications">View All Publications</button>
         </div>
       </div>
     </div>
+  </section>
+
+<!-- Publications Popup Modal -->
+<div class="publication-popup" id="publication-popup">
+  <div class="publication-popup-content">
+    <span class="close-popup" id="close-publication-popup">× Close</span>
+    <h3>All Publications</h3>
+    <ul>
+      <li>
+        <a href="https://www.ojs.cvut.cz/ojs/index.php/cej/article/view/8745">Seismic performance of tank foundations improved with stone columns</a>
+        <p>Published in Stavební obzor-Civil Engineering Journal, 2020</p>
+      </li>
+      <li>
+        <a href="https://doi.org/10.1007/s42452-020-03299-5">Physicochemical changes of lead (II) contaminated sand–clay mixture</a>
+        <p>Published in SN Applied Sciences, 2020</p>
+      </li>
+      <li>
+        <a href="https://acecr.ac.ir/fa/news/9240">[Book] Soil Improvement (in Persian)</a>
+        <p>Published in Qazvin Academic Center for Education, Culture and Research (ACECR), 2019</p>
+      </li>
+    </ul>
   </div>
-</section>
-
-
-<!-- Opportunities Section -->
-<section id="opportunities" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-5" data-aos="fade-up">Opportunities</h2>
-    <div class="row justify-content-center">
-      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
-        <div class="card border-success mb-4">
-          <div class="card-header bg-success text-white">
-            <h4 class="mb-0">Open Positions</h4>
-          </div>
-          <div class="card-body">
-            <h5 class="text-success">PhD Position in Sustainable Geotechnics</h5>
-            <p>We're seeking a motivated PhD candidate to work on our EU-funded project "CIRCULAR-GEO" developing novel recycled materials for soil stabilization.</p>
-            
-            <h5 class="text-success mt-4">Postdoctoral Researcher in LCA of Geomaterials</h5>
-            <p>2-year position available immediately for candidates with expertise in life cycle assessment applied to construction materials.</p>
-            
-            <div class="alert alert-success mt-4">
-              <h5><i class="fas fa-info-circle me-2"></i>How to Apply</h5>
-              <p>Interested candidates should submit:</p>
-              <ul>
-                <li>Curriculum Vitae (max 2 pages)</li>
-                <li>Motivation letter (1 page)</li>
-                <li>Academic transcripts</li>
-                <li>Contact details of 2 references</li>
-              </ul>
-              <p class="mb-0">Send applications to: <a href="mailto:positions@geocircular.edu" class="fw-bold">positions@geocircular.edu</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+</div>
+      
   <!-- Team Modal -->
   <div class="modal fade" id="teamModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-success text-white">
           <h5 class="modal-title">Our Research Team</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+            aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -453,31 +652,39 @@ body:not(.dark-mode) {
             <div class="col-md-6 mb-4">
               <div class="card h-100 border-success">
                 <div class="card-body text-center">
-                  <img src="https://randomuser.me/api/portraits/women/44.jpg" class="team-modal-img" alt="Dr. Jane Doe" loading="lazy">
-                  <h5>Dr. Jane Doe</h5>
+                  <img src="https://static.wixstatic.com/media/f8e62f_75a126d4493f4af39645129e594faed1~mv2.jpg/v1/crop/x_0,y_278,w_1009,h_1009/fill/w_470,h_470,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/23.jpg" class="team-modal-img"
+                    alt="Dr. Saeid Nikkhah Nasab" loading="lazy">
+                  <h5>Dr. Saeid Nikkhah Nasab</h5>
                   <p class="text-muted">Principal Investigator</p>
-                  <p>Expertise: Sustainable geomaterials, waste valorization</p>
+                  <p>Expertise: Sustainable geotechnics, waste valorization, contaminated soil</p>
                   <div class="mt-3">
-                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Email Dr. Doe"><i class="fas fa-envelope"></i></a>
-                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Google Scholar profile"><i class="fas fa-graduation-cap"></i></a>
-                    <a href="#" class="btn btn-sm btn-outline-success" aria-label="LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:saeid.nikkhah.nasab@gmail.com" class="btn btn-sm btn-outline-success me-2" aria-label="Email Dr. Nikkhah Nasab"><i
+                        class="fas fa-envelope"></i></a>
+                    <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&hl=en&user=mO3PEpEAAAAJ&sortby=pubdate" class="btn btn-sm btn-outline-success me-2" aria-label="Google Scholar profile"><i
+                        class="fas fa-graduation-cap"></i></a>
+                    <a href="https://linkedin.com/in/saeid-nikkhah-nasab" class="btn btn-sm btn-outline-success" aria-label="LinkedIn profile"><i
+                        class="fab fa-linkedin"></i></a>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <!-- Team Member 2 -->
             <div class="col-md-6 mb-4">
               <div class="card h-100 border-success">
                 <div class="card-body text-center">
-                  <img src="https://randomuser.me/api/portraits/men/32.jpg" class="team-modal-img" alt="John Smith" loading="lazy">
+                  <img src="https://randomuser.me/api/portraits/men/32.jpg" class="team-modal-img" alt="John Smith"
+                    loading="lazy">
                   <h5>John Smith</h5>
                   <p class="text-muted">PhD Researcher</p>
                   <p>Expertise: Circular construction, LCA</p>
                   <div class="mt-3">
-                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Email John"><i class="fas fa-envelope"></i></a>
-                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Google Scholar profile"><i class="fas fa-graduation-cap"></i></a>
-                    <a href="#" class="btn btn-sm btn-outline-success" aria-label="LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Email John"><i
+                        class="fas fa-envelope"></i></a>
+                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Google Scholar profile"><i
+                        class="fas fa-graduation-cap"></i></a>
+                    <a href="#" class="btn btn-sm btn-outline-success" aria-label="LinkedIn profile"><i
+                        class="fab fa-linkedin"></i></a>
                   </div>
                 </div>
               </div>
@@ -487,80 +694,7 @@ body:not(.dark-mode) {
       </div>
     </div>
   </div>
-<!-- All Publications Modal -->
-<div class="modal fade" id="allPublicationsModal" tabindex="-1" aria-labelledby="allPublicationsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title" id="allPublicationsModalLabel">Complete Publications List</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6">
-            <h5 class="text-success mb-4">2023</h5>
-            <ul class="list-unstyled">
-              <li class="mb-4">
-                <h6>Sustainable soil stabilization using recycled construction aggregates</h6>
-                <p class="mb-1 text-muted">Journal of Geotechnical and Geoenvironmental Engineering</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.geotexmem.2023.05.003</small>
-              </li>
-              <li class="mb-4">
-                <h6>Performance evaluation of recycled concrete in slope stabilization</h6>
-                <p class="mb-1 text-muted">Geotechnical Engineering Journal</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.geoen.2023.08.012</small>
-              </li>
-            </ul>
-          </div>
-          
-          <div class="col-md-6">
-            <h5 class="text-success mb-4">2022</h5>
-            <ul class="list-unstyled">
-              <li class="mb-4">
-                <h6>Life cycle assessment of geopolymer-stabilized soils</h6>
-                <p class="mb-1 text-muted">Environmental Science & Technology</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1021/acs.est.2c01234</small>
-              </li>
-              <li class="mb-4">
-                <h6>Circular economy in geotechnical engineering: A comprehensive review</h6>
-                <p class="mb-1 text-muted">Geotechnical Frontiers</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.geofront.2022.08.015</small>
-              </li>
-              <li class="mb-4">
-                <h6>Innovative reuse of plastic waste in soil reinforcement</h6>
-                <p class="mb-1 text-muted">Waste Management Journal</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.wasman.2021.07.022</small>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <h5 class="text-success mb-4">2024</h5>
-            <ul class="list-unstyled">
-              <li class="mb-4">
-                <h6>Life cycle assessment of geopolymer-stabilized soils</h6>
-                <p class="mb-1 text-muted">Environmental Science & Technology</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1021/acs.est.2c01234</small>
-              </li>
-              <li class="mb-4">
-                <h6>Circular economy in geotechnical engineering: A comprehensive review</h6>
-                <p class="mb-1 text-muted">Geotechnical Frontiers</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.geofront.2022.08.015</small>
-              </li>
-              <li class="mb-4">
-                <h6>Innovative reuse of plastic waste in soil reinforcement</h6>
-                <p class="mb-1 text-muted">Waste Management Journal</p>
-                <small><i class="fas fa-link text-success me-1"></i>DOI: 10.1016/j.wasman.2021.07.022</small>
-              </li>
-            </ul>
-          </div>          
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
   <!-- Contact Section -->
   <section id="contact" class="py-5">
     <div class="container">
@@ -568,15 +702,16 @@ body:not(.dark-mode) {
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center" data-aos="zoom-in" data-aos-once="false">
           <div class="mb-4">
-            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="social-icon" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
-            <a href="#" class="social-icon" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
-            <a href="#" class="social-icon" aria-label="Google Scholar"><i class="fab fa-google-scholar"></i></a>
-            <a href="mailto:contact@geocircular.edu" class="social-icon" aria-label="Email us"><i class="fas fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/saeid-nikkhah-nasab" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.researchgate.net/profile/Saeid-Nikkhah-Nasab?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uIiwicGFnZSI6InB1YmxpY2F0aW9uIn19" class="social-icon" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
+            <a href="https://orcid.org/0000-0002-3784-5651" class="social-icon" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
+            <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&hl=en&user=mO3PEpEAAAAJ&sortby=pubdate" class="social-icon" aria-label="Google Scholar"><i class="fab fa-google-scholar"></i></a>
+            <a href="mailto:saeid.nikkhah-nasab@geocircular.com" class="social-icon" aria-label="Email us"><i
+                class="fas fa-envelope"></i></a>
           </div>
           <p>
             <i class="fas fa-map-marker-alt me-2"></i> Department of Civil Engineering<br>
-            University Name, 123 Main Street, City, Country
+            Shandong University, China, Shan Dong Sheng, Ji Nan Shi, Licheng District, Jinan, Shanda S Rd, 27
           </p>
         </div>
       </div>
@@ -586,7 +721,9 @@ body:not(.dark-mode) {
   <!-- Footer -->
   <footer class="py-4 bg-dark text-white">
     <div class="container text-center">
-      <p class="mb-0">© 2023 GeoCircular Research Group. Sustainable by design.</p>
+      <p class="mb-0">©
+        <span id="fixed-year">2024</span> - <span id="copyright-year"></span> GeoCircular Research Group. Sustainable by design.
+      </p>
     </div>
   </footer>
 
@@ -605,11 +742,11 @@ body:not(.dark-mode) {
     });
 
     // Full-screen menu toggle
-    document.getElementById("menu-toggle").addEventListener("click", function() {
+    document.getElementById("menu-toggle").addEventListener("click", function () {
       document.getElementById("fullscreen-menu").style.display = "flex";
     });
-    
-    document.getElementById("close-menu").addEventListener("click", function() {
+
+    document.getElementById("close-menu").addEventListener("click", function () {
       document.getElementById("fullscreen-menu").style.display = "none";
     });
 
@@ -619,8 +756,46 @@ body:not(.dark-mode) {
         document.getElementById("fullscreen-menu").style.display = "none";
       });
     });
-    
+
+    // Set the copyright year dynamically
+    document.getElementById("copyright-year").innerHTML = new Date().getFullYear();
+
+    // Show all publications popup
+    document.getElementById("show-all-publications").addEventListener("click", function () {
+      document.getElementById("publication-popup").style.display = "flex";
     });
+
+    // Close the publications popup
+    document.getElementById("close-publication-popup").addEventListener("click", function () {
+      document.getElementById("publication-popup").style.display = "none";
+    });
+
+    // Show more news popup
+    document.getElementById("load-more-news").addEventListener("click", function () {
+      document.getElementById("more-news-popup").style.display = "flex";
+    });
+
+    // Close the more news popup
+    document.getElementById("close-more-news-popup").addEventListener("click", function () {
+      document.getElementById("more-news-popup").style.display = "none";
+    });
+
+        // Scroll to top functionality
+    window.onscroll = function () {
+      const mybutton = document.getElementById("goToTop");
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    };
+
+    document.getElementById("goToTop").onclick = function () {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    };
+
   </script>
 </body>
+
 </html>
