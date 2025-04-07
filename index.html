@@ -27,6 +27,9 @@
       --bg-light: #f8f9fa;
       --text-light: #212529;
       --card-bg-light: #ffffff;
+      --pub-bg-light: #ffffff;       /* Background for publication items */
+      --pub-text-light: #212529;     /* Text color for publications */
+      --pub-hover-light: rgba(46, 139, 87, 0.1); /* Hover effect */
       --nav-bg-light: rgba(248, 249, 250, 0.95);
       
       /* Dark Theme Colors */
@@ -36,6 +39,9 @@
       --bg-dark: #121212;
       --text-dark: #e0e0e0;
       --card-bg-dark: #1e1e1e;
+      --pub-bg-dark: #2a2a2a;        /* Slightly lighter than card-bg-dark */
+      --pub-text-dark: #e0e0e0;      /* Light text for dark mode */
+      --pub-hover-dark: rgba(46, 139, 87, 0.2); /* Dark mode hover */
       --nav-bg-dark: rgba(30, 30, 30, 0.95);
       
       /* Current Theme */
@@ -193,16 +199,33 @@
     }
 
     /* Publications */
-    .publication-item {
-      background-color: var(--card-bg);
-      transition: all 0.3s ease;
-    }
+.publication-item {
+  background-color: var(--pub-bg);
+  color: var(--pub-text);
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--primary);
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 5px;
+}
 
-    .publication-item:hover {
-      background-color: rgba(46, 139, 87, 0.1);
-      transform: translateX(5px);
-    }
+.publication-item:hover {
+  background-color: var(--pub-hover);
+  transform: translateX(5px);
+}
 
+/* Ensure dark mode applies correctly */
+body.dark-mode {
+  --pub-bg: var(--pub-bg-dark);
+  --pub-text: var(--pub-text-dark);
+  --pub-hover: var(--pub-hover-dark);
+}
+
+body:not(.dark-mode) {
+  --pub-bg: var(--pub-bg-light);
+  --pub-text: var(--pub-text-light);
+  --pub-hover: var(--pub-hover-light);
+}
     /* Contact Section */
     .social-icon {
       color: var(--primary);
@@ -251,16 +274,14 @@
 }
 
 #allPublicationsModal li {
-  padding: 15px;
-  border-left: 3px solid var(--accent);
-  transition: all 0.3s ease;
+  background-color: var(--pub-bg);
+  color: var(--pub-text);
 }
 
 #allPublicationsModal li:hover {
-  background-color: rgba(46, 139, 87, 0.05);
-  transform: translateX(5px);
+  background-color: var(--pub-hover);
 }
-
+    
 #allPublicationsModal h5 {
   border-bottom: 2px solid var(--accent);
   padding-bottom: 8px;
