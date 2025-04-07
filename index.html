@@ -99,15 +99,18 @@
     .navbar-brand {
       font-weight: 700;
       color: var(--primary) !important;
-          /* Navbar Link Styling */
-    .navbar-nav .nav-link {
+         /* Navbar Link Styling */
+        .navbar-nav .nav-link {
         color: var(--text); /* Use theme text color */
         transition: color 0.3s ease;
         margin: 0 0.5rem; /* Add some horizontal spacing */
+        padding: 8px 12px; /* Add padding for better hover area */
+        border-radius: 4px; /* Optional rounded corners */
     }
     .navbar-nav .nav-link:hover,
     .navbar-nav .nav-link.active { /* Style for hover and active states */
-         color: var(--primary);
+    color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.1);
     }
 
     /* Style the toggler */
@@ -115,7 +118,7 @@
         border-color: rgba(var(--text-rgb), 0.1);
     }
     .navbar-toggler-icon {
-         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(var(--text-rgb), 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(var(--text-rgb), 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
     }
 
