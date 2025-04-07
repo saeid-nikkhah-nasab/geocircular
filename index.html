@@ -1,199 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GeoCircular Research Group</title>
-
+  <!-- Preconnect to CDNs for faster loading -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/2E8B57/leaf.png">
+  <!-- Custom CSS -->
   <style>
     :root {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --card-bg: #f9f9f9;
-    }
-
-    body.dark-mode {
-      --bg-color: #121212;
-      --text-color: #ffffff;
-      --card-bg: #1f1f1f;
+      /* Light Theme Colors */
+      --primary-light: #2E8B57;
+      --secondary-light: #3a6b47;
+      --accent-light: #8FBC8F;
+      --bg-light: #f8f9fa;
+      --text-light: #212529;
+      --card-bg-light: #ffffff;
+      --nav-bg-light: rgba(248, 249, 250, 0.95);
+      
+      /* Dark Theme Colors */
+      --primary-dark: #3CB371;
+      --secondary-dark: #4CAF50;
+      --accent-dark: #6B8E23;
+      --bg-dark: #121212;
+      --text-dark: #e0e0e0;
+      --card-bg-dark: #1e1e1e;
+      --nav-bg-dark: rgba(30, 30, 30, 0.95);
+      
+      /* Current Theme */
+      --primary: var(--primary-light);
+      --secondary: var(--secondary-light);
+      --accent: var(--accent-light);
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --card-bg: var(--card-bg-light);
+      --nav-bg: var(--nav-bg-light);
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Dark Mode Classes */
+    body.dark-mode {
+      --primary: var(--primary-dark);
+      --secondary: var(--secondary-dark);
+      --accent: var(--accent-dark);
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --card-bg: var(--card-bg-dark);
+      --nav-bg: var(--nav-bg-dark);
+    }
+
+    /* Navbar */
     .navbar {
-      background-color: var(--card-bg);
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      transition: all 0.4s ease;
     }
 
-    .theme-toggle {
-      cursor: pointer;
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary) !important;
     }
 
-    /* Fullscreen Menu */
+    /* Full-screen Menu */
     #fullscreen-menu {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: var(--bg-color);
-      z-index: 2000;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 1050;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
     }
 
     #fullscreen-menu a {
+      color: white;
       font-size: 2rem;
-      margin: 1rem;
-      color: var(--text-color);
+      margin: 15px 0;
       text-decoration: none;
+      transition: color 0.3s;
     }
 
-    #fullscreen-menu .close {
+    #fullscreen-menu a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section with New Background Image */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url('https://knowhow.distrelec.com/wp-content/uploads/2023/12/iStock-1447152413-1024x683.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* About Section */
+    #about {
+      position: relative;
+      padding: 100px 0;
+      color: white;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: '';
       position: absolute;
-      top: 1rem;
-      right: 1.5rem;
-      font-size: 2rem;
-      cursor: pointer;
-      color: var(--text-color);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+      z-index: -2;
     }
 
+    #about::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+
+    .about-content {
+      background-color: rgba(30, 30, 30, 0.8);
+      padding: 40px;
+      border-radius: 10px;
+    }
+
+    /* Research Themes */
+    .research-card {
+      background-color: var(--card-bg);
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .research-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Team Modal */
+    .team-modal-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      margin: 0 auto 15px;
+    }
+
+    /* Publications */
+    .publication-item {
+      background-color: var(--card-bg);
+      transition: all 0.3s ease;
+    }
+
+    .publication-item:hover {
+      background-color: rgba(46, 139, 87, 0.1);
+      transform: translateX(5px);
+    }
+
+    /* Contact Section */
     .social-icon {
-      font-size: 1.8rem;
-      margin: 0 0.6rem;
-      color: var(--text-color);
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: color 0.3s;
     }
 
-    section {
-      padding: 80px 0;
+    .social-icon:hover {
+      color: var(--accent);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      #fullscreen-menu a {
+        font-size: 1.5rem;
+      }
+      
+      .about-content {
+        padding: 20px;
+      }
+      
+      #about {
+        padding: 60px 0;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#" aria-label="GeoCircular Home">
+        <i class="fas fa-leaf me-2"></i>GeoCircular
+      </a>
+      <button id="menu-toggle" class="navbar-toggler" aria-label="Toggle navigation">☰</button>
+      <button class="theme-toggle ms-auto me-3" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light px-4 py-3">
-  <a class="navbar-brand fw-bold" href="#">GeoCircular</a>
-  <div class="ms-auto d-flex align-items-center">
-    <button class="btn btn-outline-secondary me-2 theme-toggle" aria-label="Toggle theme">
-      <i class="fas fa-moon"></i>
-    </button>
-    <button class="btn btn-outline-secondary d-lg-none" id="menu-toggle" aria-label="Open menu">
-      <i class="fas fa-bars"></i>
-    </button>
+  <!-- Full-screen Menu -->
+  <div id="fullscreen-menu">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#teamModal">Team</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+    <button id="close-menu" class="btn btn-light mt-4">× Close</button>
   </div>
-  <div class="collapse navbar-collapse justify-content-end d-none d-lg-flex">
-    <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-      <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-      <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-      <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
 
-<!-- FULLSCREEN MENU -->
-<div id="fullscreen-menu" class="d-flex">
-  <div class="close" id="close-menu"><i class="fas fa-times"></i></div>
-  <a href="#about">About</a>
-  <a href="#projects">Projects</a>
-  <a href="#team">Team</a>
-  <a href="#contact">Contact</a>
-</div>
+  <!-- Hero Section with New Background Image -->
+  <section class="hero" aria-label="Sustainable geotechnical research">
+    <div class="hero-content" data-aos="fade-up" data-aos-once="false">
+      <h1 class="display-3 fw-bold">GeoCircular</h1>
+      <p class="lead">Innovating Geotechnics for a Circular Economy</p>
+      <a href="#about" class="btn btn-lg btn-success mt-3">Explore Our Work</a>
+    </div>
+  </section>
 
-<!-- ABOUT -->
-<section id="about" data-aos="fade-up" class="text-center">
-  <div class="container">
-    <h2>About Us</h2>
-    <p>GeoCircular is a multidisciplinary research group focused on sustainable remediation of contaminated soils and circular economy innovation.</p>
-  </div>
-</section>
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto about-content" data-aos="fade-up" data-aos-once="false">
+          <h2 class="text-center mb-4">About Us</h2>
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-right" data-aos-once="false">
+              <h3 class="text-success">Mission</h3>
+              <p>We pioneer sustainable geotechnical solutions by integrating circular economy principles to reduce waste and carbon footprint in construction and infrastructure development.</p>
+            </div>
+            <div class="col-md-6" data-aos="fade-left" data-aos-once="false">
+              <h3 class="text-success">Vision</h3>
+              <p>A world where geotechnical engineering operates in complete harmony with Earth's ecosystems, promoting sustainability through innovative material reuse and low-impact techniques.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- PROJECTS -->
-<section id="projects" style="background-color: var(--card-bg);" data-aos="fade-up" class="text-center">
-  <div class="container">
-    <h2>Our Projects</h2>
-    <p>We develop circular geotechnical solutions using industrial by-products, bio-based materials, and geostatistical models.</p>
-  </div>
-</section>
+  <!-- Research Themes -->
+  <section id="research" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up" data-aos-once="false">Research Themes</h2>
+      <div class="row g-4">
+        <!-- Theme 1 -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
+          <div class="research-card p-4">
+            <div class="text-center mb-4">
+              <i class="fas fa-layer-group fa-3x" style="color: var(--primary);"></i>
+            </div>
+            <h4 class="text-center">Sustainable Geotechnics</h4>
+            <p class="text-center">Developing eco-friendly soil stabilization methods using industrial byproducts and recycled materials.</p>
+            <div class="text-center mt-3">
+              <span class="badge bg-success me-1">Soil Mechanics</span>
+              <span class="badge bg-success">Foundation Design</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Theme 2 -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200" data-aos-once="false">
+          <div class="research-card p-4">
+            <div class="text-center mb-4">
+              <i class="fas fa-recycle fa-3x" style="color: var(--primary);"></i>
+            </div>
+            <h4 class="text-center">Circular Solutions</h4>
+            <p class="text-center">Transforming construction waste into valuable geotechnical materials through innovative processing techniques.</p>
+            <div class="text-center mt-3">
+              <span class="badge bg-success me-1">Material Science</span>
+              <span class="badge bg-success">Waste Valorization</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Theme 3 -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300" data-aos-once="false">
+          <div class="research-card p-4">
+            <div class="text-center mb-4">
+              <i class="fas fa-leaf fa-3x" style="color: var(--primary);"></i>
+            </div>
+            <h4 class="text-center">Green Infrastructure</h4>
+            <p class="text-center">Designing low-carbon geotechnical systems with minimized environmental impact throughout their lifecycle.</p>
+            <div class="text-center mt-3">
+              <span class="badge bg-success me-1">LCA</span>
+              <span class="badge bg-success">Eco-Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- TEAM -->
-<section id="team" data-aos="fade-up" class="text-center">
-  <div class="container">
-    <h2>Our Team</h2>
-    <p>We collaborate across disciplines to address critical raw material recovery, geo-environmental safety, and mine waste valorization.</p>
-  </div>
-</section>
+  <!-- Publications Section -->
+  <section id="publications" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up" data-aos-once="false">Recent Publications</h2>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="list-group">
+            <!-- Publication 1 -->
+            <a href="https://doi.org/example" class="list-group-item list-group-item-action publication-item mb-3" 
+               data-aos="fade-right" data-aos-once="false">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Sustainable soil stabilization using recycled construction aggregates</h5>
+                <small class="text-success">2023</small>
+              </div>
+              <p class="mb-1">Journal of Geotechnical and Geoenvironmental Engineering</p>
+              <small><i class="fas fa-link me-1"></i>DOI: 10.1016/j.geotexmem.2023.05.003</small>
+            </a>
+            
+            <!-- Publication 2 -->
+            <a href="https://doi.org/example" class="list-group-item list-group-item-action publication-item mb-3" 
+               data-aos="fade-left" data-aos-once="false">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Life cycle assessment of geopolymer-stabilized soils</h5>
+                <small class="text-success">2022</small>
+              </div>
+              <p class="mb-1">Environmental Science & Technology</p>
+              <small><i class="fas fa-link me-1"></i>DOI: 10.1021/acs.est.2c01234</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact" data-aos="fade-up" class="text-center">
-  <div class="container">
-    <h2>Contact Us</h2>
-    <p>Interested in collaborating? Reach out to our team or follow us on social media.</p>
-    <div>
-      <a href="mailto:contact@geocircular.org" class="social-icon"><i class="fas fa-envelope"></i></a>
-      <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-      <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+  <!-- Team Modal -->
+  <div class="modal fade" id="teamModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">Our Research Team</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!-- Team Member 1 -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 border-success">
+                <div class="card-body text-center">
+                  <img src="https://randomuser.me/api/portraits/women/44.jpg" class="team-modal-img" alt="Dr. Jane Doe" loading="lazy">
+                  <h5>Dr. Jane Doe</h5>
+                  <p class="text-muted">Principal Investigator</p>
+                  <p>Expertise: Sustainable geomaterials, waste valorization</p>
+                  <div class="mt-3">
+                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Email Dr. Doe"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Google Scholar profile"><i class="fas fa-graduation-cap"></i></a>
+                    <a href="#" class="btn btn-sm btn-outline-success" aria-label="LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Team Member 2 -->
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 border-success">
+                <div class="card-body text-center">
+                  <img src="https://randomuser.me/api/portraits/men/32.jpg" class="team-modal-img" alt="John Smith" loading="lazy">
+                  <h5>John Smith</h5>
+                  <p class="text-muted">PhD Researcher</p>
+                  <p>Expertise: Circular construction, LCA</p>
+                  <div class="mt-3">
+                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Email John"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="btn btn-sm btn-outline-success me-2" aria-label="Google Scholar profile"><i class="fas fa-graduation-cap"></i></a>
+                    <a href="#" class="btn btn-sm btn-outline-success" aria-label="LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer class="text-center py-4" style="background-color: var(--card-bg);">
-  <div class="container">
-    <p class="mb-0">&copy; 2025 GeoCircular Research Group. All rights reserved.</p>
-  </div>
-</footer>
+  <!-- Contact Section -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up" data-aos-once="false">Contact Us</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="zoom-in" data-aos-once="false">
+          <div class="mb-4">
+            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="social-icon" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
+            <a href="#" class="social-icon" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
+            <a href="#" class="social-icon" aria-label="Google Scholar"><i class="fab fa-google-scholar"></i></a>
+            <a href="mailto:contact@geocircular.edu" class="social-icon" aria-label="Email us"><i class="fas fa-envelope"></i></a>
+          </div>
+          <p>
+            <i class="fas fa-map-marker-alt me-2"></i> Department of Civil Engineering<br>
+            University Name, 123 Main Street, City, Country
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  // AOS init
-  AOS.init({ once: true });
+  <!-- Footer -->
+  <footer class="py-4 bg-dark text-white">
+    <div class="container text-center">
+      <p class="mb-0">© 2023 GeoCircular Research Group. Sustainable by design.</p>
+    </div>
+  </footer>
 
-  // Theme toggle
-  const toggleBtn = document.querySelector('.theme-toggle');
-  toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const icon = toggleBtn.querySelector('i');
-    icon.classList.toggle('fa-moon');
-    icon.classList.toggle('fa-sun');
-  });
-
-  // Fullscreen menu toggle
-  const menu = document.getElementById('fullscreen-menu');
-  document.getElementById('menu-toggle').addEventListener('click', () => {
-    menu.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  });
-
-  document.getElementById('close-menu').addEventListener('click', () => {
-    menu.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  });
-
-  // Smooth close on nav click
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.style.display = 'none';
-      document.body.style.overflow = 'auto';
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Initialize AOS animation with scroll-triggered fade effects
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false, // Allows animations to replay on scroll up/down
+      mirror: true // Elements animate out while scrolling past them
     });
-  });
-</script>
 
+    // Full-screen menu toggle
+    document.getElementById("menu-toggle").addEventListener("click", function() {
+      document.getElementById("fullscreen-menu").style.display = "flex";
+    });
+    
+    document.getElementById("close-menu").addEventListener("click", function() {
+      document.getElementById("fullscreen-menu").style.display = "none";
+    });
+
+    // Close menu when clicking on links
+    document.querySelectorAll("#fullscreen-menu a").forEach(item => {
+      item.addEventListener("click", () => {
+        document.getElementById("fullscreen-menu").style.display = "none";
+      });
+    });
+
+    // Enhanced Dark Mode Toggle
+    const themeToggle = document.querySelector(".theme-toggle");
+    const body = document.body;
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    // Toggle dark mode
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      
+      // Update icon
+      if (body.classList.contains("dark-mode")) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
 </body>
 </html>
