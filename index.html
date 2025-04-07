@@ -215,16 +215,6 @@ body:not(.dark-mode) {
       color: var(--accent);
     }
 
-    /* Theme Toggle */
-    .theme-toggle {
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       #fullscreen-menu a {
@@ -279,9 +269,6 @@ body:not(.dark-mode) {
         <i class="fas fa-leaf me-2"></i>GeoCircular
       </a>
       <button id="menu-toggle" class="navbar-toggler" aria-label="Toggle navigation">☰</button>
-      <button class="theme-toggle ms-auto me-3" aria-label="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-      </button>
     </div>
   </nav>
 
@@ -632,30 +619,7 @@ body:not(.dark-mode) {
         document.getElementById("fullscreen-menu").style.display = "none";
       });
     });
-
-    // Enhanced Dark Mode Toggle
-    const themeToggle = document.querySelector(".theme-toggle");
-    const body = document.body;
     
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      body.classList.add('dark-mode');
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-
-    // Toggle dark mode
-    themeToggle.addEventListener("click", () => {
-      body.classList.toggle("dark-mode");
-      
-      // Update icon
-      if (body.classList.contains("dark-mode")) {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.setItem('theme', 'light');
-      }
     });
   </script>
 </body>
