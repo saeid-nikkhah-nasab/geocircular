@@ -766,21 +766,14 @@
       mirror: true // Elements animate out while scrolling past them
     });
 
-    // Full-screen menu toggle
-    document.getElementById("menu-toggle").addEventListener("click", function () {
-      document.getElementById("fullscreen-menu").style.display = "flex";
-    });
-
-    document.getElementById("close-menu").addEventListener("click", function () {
-      document.getElementById("fullscreen-menu").style.display = "none";
-    });
-
-    // Close menu when clicking on links
-    document.querySelectorAll("#fullscreen-menu a").forEach(item => {
-      item.addEventListener("click", () => {
-        document.getElementById("fullscreen-menu").style.display = "none";
-      });
-    });
+// JavaScript to collapse the navbar after clicking an item
+document.querySelectorAll('#navbarNav a.nav-link').forEach(item => {
+  item.addEventListener('click', () => {
+    // Collapse the navbar after link is clicked
+    const collapseElement = document.querySelector('#navbarNav');
+    if (collapseElement.classList.contains('show')) {
+      const bsCollapse = new bootstrap.Collapse(collapseElement);
+      bsCollapse.hide();
 
     // Set the copyright year dynamically
     document.getElementById("copyright-year").innerHTML = new Date().getFullYear();
